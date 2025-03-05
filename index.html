@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="rishek.png">
+    <link id="favicon" rel="icon" type="image/png" href="rishek.png">
     <title>Hello Rishek</title>
     <style>
         body {
@@ -59,7 +59,24 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        /* Animations */
+
+        @keyframes ultimateMagic {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6)); }
+            10% { transform: translate(-30px, 20px) scale(1.1) rotate(10deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 255, 0.8)); }
+            20% { transform: translate(20px, -30px) scale(0.9) rotate(-15deg); filter: drop-shadow(0px 0px 15px rgba(255, 0, 255, 0.8)); }
+            30% { transform: translate(-40px, 10px) scale(1.2) rotate(20deg); filter: drop-shadow(0px 0px 20px rgba(255, 255, 0, 0.8)); }
+            40% { transform: translate(30px, -20px) scale(1) rotate(-10deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 0, 0.8)); }
+            50% { transform: translate(-10px, 30px) scale(1.1) rotate(5deg); filter: drop-shadow(0px 0px 25px rgba(255, 0, 0, 0.8)); }
+            60% { transform: translate(20px, -40px) scale(0.95) rotate(-5deg); filter: drop-shadow(0px 0px 15px rgba(0, 0, 255, 0.8)); }
+            70% { transform: translate(-30px, 10px) scale(1.05) rotate(15deg); filter: drop-shadow(0px 0px 20px rgba(255, 165, 0, 0.8)); }
+            80% { transform: translate(10px, -30px) scale(1) rotate(-10deg); filter: drop-shadow(0px 0px 15px rgba(75, 0, 130, 0.8)); }
+            90% { transform: translate(-20px, 20px) scale(1.1) rotate(0deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 255, 0.8)); }
+            100% { transform: translate(0, 0) scale(1) rotate(0deg); filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6)); }
+        }
+        .default-animation {
+            animation: ultimateMagic 6s infinite ease-in-out alternate;
+        }
+
         @keyframes beat1 {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
@@ -146,12 +163,20 @@
         .radio-container input:checked + label {
             background-color: #28a745;
         }
+        .animated-element {
+            transition: all 0.5s ease-in-out;
+        }
+
+        .radio-container button {
+            animation: none !important;
+        }
+
     </style>
 </head>
 <body>
     <h1 class="heading">Hello, I am Rishek J</h1>
     <h1 id="title" class="title">
-        <img src="rishek.png" alt="Logo">
+        <img id="titleImage" src="rishek.png" alt="Logo">
     </h1>
 
     <div class="radio-container">
@@ -177,10 +202,11 @@
 
     <script>
         const title = document.getElementById('title');
+        const titleImage = document.getElementById('titleImage'); // Ensure image is also animated
         const radios = document.querySelectorAll('input[name="animation"]');
         const audio = document.getElementById('audio');
         const body = document.body;
-
+        
         const sounds = {
             "": "default.mp3",
             "beat1": "beat1.mp3",
@@ -188,7 +214,7 @@
             "beat3": "beat3.mp3",
             "beat4": "beat4.mp3"
         };
-
+    
         function createFallingEffect(symbol) {
             for (let i = 0; i < 10; i++) {
                 let fallingElement = document.createElement('div');
@@ -199,22 +225,45 @@
                 setTimeout(() => fallingElement.remove(), 4000);
             }
         }
-        
+    
+        function setAnimation(animation) {
+            // Remove any previously applied animation class
+            title.classList.remove('default-animation', 'beat1', 'beat2', 'beat3', 'beat4');
+            titleImage.classList.remove('default-animation', 'beat1', 'beat2', 'beat3', 'beat4');
+    
+            if (animation === "") {
+                // Apply the default animation class
+                title.classList.add('default-animation');
+                titleImage.classList.add('default-animation');
+            } else {
+                title.classList.add(animation);
+                titleImage.classList.add(animation);
+            }
+    
+            body.className = animation;
+            audio.src = sounds[animation];
+            audio.play();
+    
+            switch (animation) {
+                case 'beat1': createFallingEffect('🎵'); break;
+                case 'beat2': createFallingEffect('🎶'); break;
+                case 'beat3': createFallingEffect('💃'); break;
+                case 'beat4': createFallingEffect('🔥'); break;
+                default: createFallingEffect('⭐'); break;
+            }
+        }
+    
+        // Set default animation on page load
+        window.onload = function () {
+            document.getElementById('default').checked = true;
+            setAnimation(""); // Apply the default animation
+        };
+    
         radios.forEach(radio => {
             radio.addEventListener('change', (event) => {
-                title.className = 'title ' + event.target.value;
-                body.className = event.target.value;
-                audio.src = sounds[event.target.value];
-                audio.play();
-                
-                switch (event.target.value) {
-                    case 'beat1': createFallingEffect('🎵'); break;
-                    case 'beat2': createFallingEffect('🎶'); break;
-                    case 'beat3': createFallingEffect('💃'); break;
-                    case 'beat4': createFallingEffect('🔥'); break;
-                }
+                setAnimation(event.target.value);
             });
         });
-    </script>
+    </script>      
 </body>
 </html>
