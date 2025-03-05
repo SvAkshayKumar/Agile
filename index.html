@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="image.png">
+    <link rel="icon" type="image/png" href="rishek.png">
     <title>Hello Rishek</title>
     <style>
         body {
@@ -16,8 +16,13 @@
         }
 
         h1 {
-            color: #333;
+            color: black;
         }
+        .heading{
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 50px;
+        }
+
 
         .title {
             display: flex;
@@ -75,10 +80,42 @@
             50% { transform: skew(10deg, 10deg); }
         }
 
-        .beat1 { animation: beat1 0.5s infinite ease-in-out; background-color: #ffcccb; }
-        .beat2 { animation: beat2 0.5s infinite ease-in-out; background-color: #add8e6; }
-        .beat3 { animation: beat3 0.5s infinite ease-in-out; background-color: #90ee90; }
-        .beat4 { animation: beat4 0.5s infinite ease-in-out; background-color: #ffd700; }
+        .beat1 { 
+            animation: beat1 0.5s infinite ease-in-out; 
+            background-image: url('https://thumbs.dreamstime.com/b/tiger-shown-its-mouth-wide-open-showing-teeth-appears-to-be-angry-aggressive-as-has-344127676.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        .beat2 { 
+            animation: beat2 0.5s infinite ease-in-out; 
+            background-image: url('https://images.freeimages.com/images/large-previews/4a9/regal-cheetah-portrait-0410-5704643.jpg?fmt=webp&w=500');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        .beat3 { 
+            animation: beat3 0.5s infinite ease-in-out; 
+            background-image: url('https://images.pexels.com/photos/51129/leopard-animal-cat-cheetah-51129.jpeg?cs=srgb&dl=pexels-pixabay-51129.jpg&fm=jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        .beat4 { 
+            animation: beat4 0.5s infinite ease-in-out; 
+            background-image: url('https://wilang.org/wp-content/uploads/2016/04/lion-1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
 
         /* Radio Button Styling */
         .radio-container {
@@ -112,9 +149,9 @@
     </style>
 </head>
 <body>
-    <h1>Hello, I am Rishek J</h1>
+    <h1 class="heading">Hello, I am Rishek J</h1>
     <h1 id="title" class="title">
-        <img src="image.png" alt="Logo"> My Website
+        <img src="rishek.png" alt="Logo">
     </h1>
 
     <div class="radio-container">
