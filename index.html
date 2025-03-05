@@ -3,267 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link id="favicon" rel="icon" type="image/png" href="rishek.png">
-    <title>Hello Rishek</title>
+    <title>Agile Lab Experiment 2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            overflow: hidden;
+            text-align: center;
+            background-color: #f4f4f4;
         }
-
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         h1 {
-            color: black;
+            color: #333;
         }
-        .heading{
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 50px;
+        p {
+            color: #666;
         }
-
-
-        .title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 50px;
-            font-weight: bold;
-            background-color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 8px;
-            width: fit-content;
-            margin: 20px auto;
-            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .title img {
-            width: 250px;
-            height: 250px;
-        }
-
-        /* Falling animation */
-        .falling {
-            position: absolute;
-            top: -50px;
-            left: calc(10% + 80% * var(--rand));
-            font-size: 30px;
-            opacity: 0.8;
-            animation: fall linear 4s infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-
-        @keyframes ultimateMagic {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6)); }
-            10% { transform: translate(-30px, 20px) scale(1.1) rotate(10deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 255, 0.8)); }
-            20% { transform: translate(20px, -30px) scale(0.9) rotate(-15deg); filter: drop-shadow(0px 0px 15px rgba(255, 0, 255, 0.8)); }
-            30% { transform: translate(-40px, 10px) scale(1.2) rotate(20deg); filter: drop-shadow(0px 0px 20px rgba(255, 255, 0, 0.8)); }
-            40% { transform: translate(30px, -20px) scale(1) rotate(-10deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 0, 0.8)); }
-            50% { transform: translate(-10px, 30px) scale(1.1) rotate(5deg); filter: drop-shadow(0px 0px 25px rgba(255, 0, 0, 0.8)); }
-            60% { transform: translate(20px, -40px) scale(0.95) rotate(-5deg); filter: drop-shadow(0px 0px 15px rgba(0, 0, 255, 0.8)); }
-            70% { transform: translate(-30px, 10px) scale(1.05) rotate(15deg); filter: drop-shadow(0px 0px 20px rgba(255, 165, 0, 0.8)); }
-            80% { transform: translate(10px, -30px) scale(1) rotate(-10deg); filter: drop-shadow(0px 0px 15px rgba(75, 0, 130, 0.8)); }
-            90% { transform: translate(-20px, 20px) scale(1.1) rotate(0deg); filter: drop-shadow(0px 0px 10px rgba(0, 255, 255, 0.8)); }
-            100% { transform: translate(0, 0) scale(1) rotate(0deg); filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.6)); }
-        }
-        .default-animation {
-            animation: ultimateMagic 6s infinite ease-in-out alternate;
-        }
-
-        @keyframes beat1 {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes beat2 {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        @keyframes beat3 {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes beat4 {
-            0%, 100% { transform: skew(0deg); }
-            50% { transform: skew(10deg, 10deg); }
-        }
-
-        .beat1 { 
-            animation: beat1 0.5s infinite ease-in-out; 
-            background-image: url('https://thumbs.dreamstime.com/b/tiger-shown-its-mouth-wide-open-showing-teeth-appears-to-be-angry-aggressive-as-has-344127676.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-        }
-
-        .beat2 { 
-            animation: beat2 0.5s infinite ease-in-out; 
-            background-image: url('https://images.freeimages.com/images/large-previews/4a9/regal-cheetah-portrait-0410-5704643.jpg?fmt=webp&w=500');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-        }
-
-        .beat3 { 
-            animation: beat3 0.5s infinite ease-in-out; 
-            background-image: url('https://images.pexels.com/photos/51129/leopard-animal-cat-cheetah-51129.jpeg?cs=srgb&dl=pexels-pixabay-51129.jpg&fm=jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-        }
-
-        .beat4 { 
-            animation: beat4 0.5s infinite ease-in-out; 
-            background-image: url('https://wilang.org/wp-content/uploads/2016/04/lion-1.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-        }
-
-
-        /* Radio Button Styling */
-        .radio-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .radio-container label {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .radio-container input {
-            display: none;
-        }
-
-        .radio-container label:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        .radio-container input:checked + label {
-            background-color: #28a745;
-        }
-        .animated-element {
-            transition: all 0.5s ease-in-out;
-        }
-
-        .radio-container button {
-            animation: none !important;
-        }
-
     </style>
 </head>
 <body>
-    <h1 class="heading">Hello, I am Rishek J</h1>
-    <h1 id="title" class="title">
-        <img id="titleImage" src="rishek.png" alt="Logo">
-    </h1>
-
-    <div class="radio-container">
-        <input type="radio" id="default" name="animation" value="" checked>
-        <label for="default">Default</label>
-        
-        <input type="radio" id="beat1" name="animation" value="beat1">
-        <label for="beat1">Beat 1</label>
-        
-        <input type="radio" id="beat2" name="animation" value="beat2">
-        <label for="beat2">Beat 2</label>
-        
-        <input type="radio" id="beat3" name="animation" value="beat3">
-        <label for="beat3">Beat 3</label>
-        
-        <input type="radio" id="beat4" name="animation" value="beat4">
-        <label for="beat4">Beat 4</label>
+    <div class="container">
+        <h1>Agile Lab Experiment 2</h1>
+        <p>This is a simple webpage for Agile Lab Experiment 2.</p>
     </div>
-
-    <audio id="audio" loop>
-        <source src="default.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        const title = document.getElementById('title');
-        const titleImage = document.getElementById('titleImage'); // Ensure image is also animated
-        const radios = document.querySelectorAll('input[name="animation"]');
-        const audio = document.getElementById('audio');
-        const body = document.body;
-        
-        const sounds = {
-            "": "default.mp3",
-            "beat1": "beat1.mp3",
-            "beat2": "beat2.mp3",
-            "beat3": "beat3.mp3",
-            "beat4": "beat4.mp3"
-        };
-    
-        function createFallingEffect(symbol) {
-            for (let i = 0; i < 10; i++) {
-                let fallingElement = document.createElement('div');
-                fallingElement.className = 'falling';
-                fallingElement.innerHTML = symbol;
-                fallingElement.style.setProperty('--rand', Math.random());
-                document.body.appendChild(fallingElement);
-                setTimeout(() => fallingElement.remove(), 4000);
-            }
-        }
-    
-        function setAnimation(animation) {
-            // Remove any previously applied animation class
-            title.classList.remove('default-animation', 'beat1', 'beat2', 'beat3', 'beat4');
-            titleImage.classList.remove('default-animation', 'beat1', 'beat2', 'beat3', 'beat4');
-    
-            if (animation === "") {
-                // Apply the default animation class
-                title.classList.add('default-animation');
-                titleImage.classList.add('default-animation');
-            } else {
-                title.classList.add(animation);
-                titleImage.classList.add(animation);
-            }
-    
-            body.className = animation;
-            audio.src = sounds[animation];
-            audio.play();
-    
-            switch (animation) {
-                case 'beat1': createFallingEffect('🎵'); break;
-                case 'beat2': createFallingEffect('🎶'); break;
-                case 'beat3': createFallingEffect('💃'); break;
-                case 'beat4': createFallingEffect('🔥'); break;
-                default: createFallingEffect('⭐'); break;
-            }
-        }
-    
-        // Set default animation on page load
-        window.onload = function () {
-            document.getElementById('default').checked = true;
-            setAnimation(""); // Apply the default animation
-        };
-    
-        radios.forEach(radio => {
-            radio.addEventListener('change', (event) => {
-                setAnimation(event.target.value);
-            });
-        });
-    </script>      
 </body>
 </html>
