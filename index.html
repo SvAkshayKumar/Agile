@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="image.png">
+    <title>Hello Rishek</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 50px;
+            font-weight: bold;
+            background-color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            width: fit-content;
+            margin: 20px auto;
+            box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title img {
+            width: 250px;
+            height: 250px;
+        }
+
+        /* Falling animation */
+        .falling {
+            position: absolute;
+            top: -50px;
+            left: calc(10% + 80% * var(--rand));
+            font-size: 30px;
+            opacity: 0.8;
+            animation: fall linear 4s infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Animations */
+        @keyframes beat1 {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes beat2 {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        @keyframes beat3 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes beat4 {
+            0%, 100% { transform: skew(0deg); }
+            50% { transform: skew(10deg, 10deg); }
+        }
+
+        .beat1 { animation: beat1 0.5s infinite ease-in-out; background-color: #ffcccb; }
+        .beat2 { animation: beat2 0.5s infinite ease-in-out; background-color: #add8e6; }
+        .beat3 { animation: beat3 0.5s infinite ease-in-out; background-color: #90ee90; }
+        .beat4 { animation: beat4 0.5s infinite ease-in-out; background-color: #ffd700; }
+
+        /* Radio Button Styling */
+        .radio-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .radio-container label {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .radio-container input {
+            display: none;
+        }
+
+        .radio-container label:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .radio-container input:checked + label {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, I am Rishek J</h1>
+    <h1 id="title" class="title">
+        <img src="image.png" alt="Logo"> My Website
+    </h1>
+
+    <div class="radio-container">
+        <input type="radio" id="default" name="animation" value="" checked>
+        <label for="default">Default</label>
+        
+        <input type="radio" id="beat1" name="animation" value="beat1">
+        <label for="beat1">Beat 1</label>
+        
+        <input type="radio" id="beat2" name="animation" value="beat2">
+        <label for="beat2">Beat 2</label>
+        
+        <input type="radio" id="beat3" name="animation" value="beat3">
+        <label for="beat3">Beat 3</label>
+        
+        <input type="radio" id="beat4" name="animation" value="beat4">
+        <label for="beat4">Beat 4</label>
+    </div>
+
+    <audio id="audio" loop>
+        <source src="default.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const title = document.getElementById('title');
+        const radios = document.querySelectorAll('input[name="animation"]');
+        const audio = document.getElementById('audio');
+        const body = document.body;
+
+        const sounds = {
+            "": "default.mp3",
+            "beat1": "beat1.mp3",
+            "beat2": "beat2.mp3",
+            "beat3": "beat3.mp3",
+            "beat4": "beat4.mp3"
+        };
+
+        function createFallingEffect(symbol) {
+            for (let i = 0; i < 10; i++) {
+                let fallingElement = document.createElement('div');
+                fallingElement.className = 'falling';
+                fallingElement.innerHTML = symbol;
+                fallingElement.style.setProperty('--rand', Math.random());
+                document.body.appendChild(fallingElement);
+                setTimeout(() => fallingElement.remove(), 4000);
+            }
+        }
+        
+        radios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                title.className = 'title ' + event.target.value;
+                body.className = event.target.value;
+                audio.src = sounds[event.target.value];
+                audio.play();
+                
+                switch (event.target.value) {
+                    case 'beat1': createFallingEffect('🎵'); break;
+                    case 'beat2': createFallingEffect('🎶'); break;
+                    case 'beat3': createFallingEffect('💃'); break;
+                    case 'beat4': createFallingEffect('🔥'); break;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
