@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging App</title>
+    <script>
+        async function sendMessage() {
+            const roomCode = document.getElementById('roomCode').value;
+            const sender = document.getElementById('sender').value;
+            const receiver = document.getElementById('receiver').value;
+            const text = document.getElementById('text').value;
+            
+            const response = await fetch('/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ roomCode, sender_email: sender, receiver_email: receiver, text, image: null })
+            });
+            const result = await response.json();
+            alert(result.success ? "Message sent!" : "Error sending message");
+        }
+        
+        async function loadMessages() {
+            const roomCode = document.getElementById('roomCode').value;
+            if (!roomCode) {
+                const senderEmail = document.getElementById('sender').value;
+                const receiverEmail = document.getElementById('receiver').value;
+                const response = await fetch(`/messages/${senderEmail}/${receiverEmail}`);
+                const messages = await response.json();
+            }else{
+                const response = await fetch(`/messages/${roomCode}`);
+                const messages = await response.json();
+            }
+            
+            let output = '';
+            messages.forEach(msg => {
+                output += `<p><strong>${msg.sender_email}:</strong> ${msg.text}</p>`;
+            });
+            document.getElementById('messages').innerHTML = output;
+        }
+    </script>
+</head>
+<body>
+    <h1>Messaging App</h1>
+    <label>Room Code: <input id="roomCode" type="text"></label>
+    <br>
+    <label>Sender Email: <input id="sender" type="email"></label>
+    <br>
+    <label>Receiver Email: <input id="receiver" type="email"></label>
+    <br>
+    <label>Message: <input id="text" type="text"></label>
+    <br>
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="loadMessages()">Load Messages</button>
+    <div id="messages"></div>
+</body>
+</html>
